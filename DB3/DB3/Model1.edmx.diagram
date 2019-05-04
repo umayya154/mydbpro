@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f801b1084cbd418eb15e35e0ed97b582" Name="Diagram1">
+        <EntityTypeShape EntityType="DB3Model.Bill" Width="1.5" PointX="7.5" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB3Model.Company" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB3Model.Customer" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB3Model.Medicine" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB3Model.Order" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB3Model.Salary" Width="1.5" PointX="10" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB3Model.Sell" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB3Model.Staff" Width="1.5" PointX="7.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB3Model.Stock" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB3Model.sysdiagram" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <AssociationConnector Association="DB3Model.FK_Bill_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="DB3Model.FK_Medicine_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="DB3Model.FK_Order_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="DB3Model.FK_Order_Medicine" ManuallyRouted="false" />
+        <AssociationConnector Association="DB3Model.FK_Sales_Medicine" ManuallyRouted="false" />
+        <AssociationConnector Association="DB3Model.FK_Stock_Medicine" ManuallyRouted="false" />
+        <AssociationConnector Association="DB3Model.FK_Salary_Staff" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

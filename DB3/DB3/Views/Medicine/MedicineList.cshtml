@@ -1,0 +1,70 @@
+﻿@model IEnumerable<DB3.Models.MedicineModel>
+
+@{
+    ViewBag.Title = "MedicineList";
+    Layout = "~/Views/Shared/_Layoutstaff.cshtml";
+}
+<div class="agileits-heading">
+    <h3> Add Medicine </h3>
+</div>
+<p>
+    @Html.ActionLink("Add Medicine", "MedicineAdd")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mfg_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.exp_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.batch)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.company_Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mfg_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.exp_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.batch)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.company_Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "MedicineEdit", new { id=item.id }) |
+            @Html.ActionLink("Details", "MedicineDetails", new { id=item.id }) |
+            @Html.ActionLink("Delete", "MedicineDelete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

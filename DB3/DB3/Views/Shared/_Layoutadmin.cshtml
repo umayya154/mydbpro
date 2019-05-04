@@ -1,0 +1,234 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Medico Club a Medical Category Bootstrap responsive Website Template | Home :: w3layouts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Medico Club Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- bootstrap-css -->
+    <link href="~/Content/template/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <!--// bootstrap-css -->
+    <!-- css -->
+    <link rel="stylesheet" href="~/Content/template/css/style.css" type="text/css" media="all" />
+    <!--// css -->
+    <!-- font-awesome icons -->
+    <link href="~/Content/template/css/font-awesome.css" rel="stylesheet">
+    <!-- //font-awesome icons -->
+    <!-- portfolio -->
+    <link rel="stylesheet" href="~/Content/template/css/chocolat.css" type="text/css" media="all">
+    <!-- //portfolio -->
+    <!-- font -->
+    <link href="//fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,700italic,700,400italic,300italic,300' rel='stylesheet' type='text/css'>
+    <!-- //font -->
+    <script src="~/Content/template/js/jquery-1.11.1.min.js"></script>
+    <script src="~/Content/template/js/bootstrap.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+            });
+        });
+    </script>
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <!-- banner -->
+    <div class="banner jarallax">
+        <div class="agileinfo-dot">
+            <div class="header-top">
+                <div class="header">
+                    <div class="header-top-info">
+                        <nav class="navbar navbar-default">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <div class="agileits-logo">
+                                    <h1><a href="#">Medico <span>Club</span></a></h1>
+                                </div>
+                            </div>
+
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+                            <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
+                                <nav>
+                                    <ul class="nav navbar-nav">
+                                        <li class="active"><a href="~/Views/Home/Index.cshtml">Home</a></li>
+                                        <li><a href="#" class="scroll">Logout</a></li>
+                                        <!--><li><a href="#gallery" class="scroll">Gallery</a></li>
+                                        <li><a href="#team" class="scroll">Team</a></li>
+                                        <li><a href="#events" class="scroll">Events</a></li>
+                                        <li><a href="#mail" class="scroll">Mail Us</a></li>-->
+                                    </ul>
+                                </nav>
+                            </div>
+                            <!-- /.navbar-collapse -->
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="w3layouts-banner-info">
+                <div class="container">
+                    <div class="w3layouts-banner-slider">
+                        <div class="w3layouts-banner-top-slider">
+                            <div class="slider">
+                                <div class="callbacks_container">
+                                    <ul class="rslides callbacks callbacks1" id="slider4">
+                                        <li>
+                                            <div class="w3ls-text">
+                                                <div class="w3ls-text-info">
+                                                    <h2>Health<span>is better</span><span> than </span><span> Wealth...</span></h2>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="w3ls-text">
+                                                <div class="w3ls-text-info">
+                                                    <h2><span>be healthy</span><span>and</span>positive</h2>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="clearfix"> </div>
+                                <script src="~/Content/template/js/responsiveslides.min.js"></script>
+                                <script>
+                                    // You can also use "$(window).load(function() {"
+                                    $(function () {
+                                        // Slideshow 4
+                                        $("#slider4").responsiveSlides({
+                                            auto:  true,
+                                            pager: true,
+                                            nav: true,
+                                            speed: 500,
+                                            namespace: "callbacks",
+                                            before: function () {
+                                                $('.events').append("<li>before event fired.</li>");
+                                            },
+                                            after: function () {
+                                                $('.events').append("<li>after event fired.</li>");
+                                            }
+                                        });
+
+                                    });
+                                </script>
+                                <!--banner Slider starts Here-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //banner -->
+    <div>
+        @RenderBody()
+    </div>
+    <div class="contact" id="mail">
+        <div class="container">
+            <div class="agileits-heading">
+                <h3>Contact</h3>
+            </div>
+            <div class="w3layouts-contact-grids">
+                <div class="col-sm-3 w3layouts-contact-grid">
+                    <i class="fa fa-map" aria-hidden="true"></i>
+                    <h5>Address</h5>
+                    <p>UET CSE Department Lahore</p>
+                </div>
+                <div class="col-sm-3 w3layouts-contact-grid">
+                    <i class="fa fa-phone" aria-hidden="true"></i>
+                    <h5>Phone/Fax</h5>
+                    <p>+92 42 99029216</p>
+                    <p>+92 42 99029227</p>
+                </div>
+                <div class="col-sm-3 w3layouts-contact-grid">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                    <h5>Email</h5>
+                    <p><a href="www.uet.edu.pk"> registrar@uet.edu.pk</a></p>
+                    <p><a href="www.uet.edu.pk"> abidumer@uet.edu.pk</a></p>
+                </div>
+                <div class="col-sm-3 w3layouts-contact-grid">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                    <h5>Social</h5>
+                    <p>Touch With Us</p>
+                    <div class="agileinfo-social-grids">
+                        <ul>
+                            =
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                            <li><a href="#"><i class="fa fa-vk"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="container">
+            <div class="copyright">
+                <p>© 2019 Medico Club. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <script src="~/Content/template/js/jarallax.js"></script>
+    <script src="~/Content/template/js/SmoothScroll.min.js"></script>
+    <script type="text/javascript">
+        /* init Jarallax */
+        $('.jarallax').jarallax({
+            speed: 0.5,
+            imgWidth: 1366,
+            imgHeight: 768
+        })
+    </script>
+    <script src="~/Content/template/js/responsiveslides.min.js"></script>
+    <script type="text/javascript" src="~/Content/template/js/move-top.js"></script>
+    <script type="text/javascript" src="~/Content/template/js/easing.js"></script>
+    <!-- here stars scrolling icon -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            /*
+                var defaults = {
+                containerID: 'toTop', // fading element id
+                containerHoverID: 'toTopHover', // fading element hover id
+                scrollSpeed: 1200,
+                easingType: 'linear'
+                };
+            */
+
+            $().UItoTop({ easingType: 'easeOutQuart' });
+
+        });
+    </script>
+    <!-- //here ends scrolling icon -->
+    <!-- Tabs-JavaScript -->
+    <script src="~/Content/template/js/jquery.filterizr.js"></script>
+    <script src="~/Content/template/js/controls.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('.filtr-container').filterizr();
+        });
+    </script>
+    <!-- //Tabs-JavaScript -->
+    <!-- PopUp-Box-JavaScript -->
+    <script src="~/Content/template/js/jquery.chocolat.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('.filtr-item a').Chocolat();
+        });
+    </script>
+    <!-- //PopUp-Box-JavaScript -->
+</body>
+</html>

@@ -1,0 +1,75 @@
+﻿@model DB3.Models.MedicineModel
+
+@{
+    ViewBag.Title = "MedicineDetails";
+    Layout = "~/Views/Shared/_Layoutstaff.cshtml";
+}
+
+<h2>MedicineDetails</h2>
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mfg_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mfg_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.exp_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.exp_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.batch)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.batch)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.company_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.company_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "MedicineEdit", new { id = Model.id }) |
+    @Html.ActionLink("Medicine List", "MedicineList")
+</p>

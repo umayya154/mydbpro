@@ -1,0 +1,53 @@
+﻿@model DB3.Models.CompanyModel
+
+@{
+    ViewBag.Title = "CompanyDetails";
+    Layout = "~/Views/Shared/_Layoutstaff.cshtml";
+}
+
+
+<div>
+    <div class="agileits-heading">
+        <br /><br />
+        <h3> Company Details</h3>
+        <br />
+    </div>
+    <div class="container-fluid">
+        <div style="margin-top:20px;" class="row-fluid">
+            <div class="offset4 span4 well">
+
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Name)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Address)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Contact)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Contact)
+                    </dd>
+
+                </dl>
+            </div>
+            <p>
+                @Html.ActionLink("Edit", "CompanyEdit", new { id = Model.id }) |
+                @Html.ActionLink("Company List", "CompanyList")
+            </p>
+         </div>
+     </div>
+</div>
