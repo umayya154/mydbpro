@@ -15,10 +15,10 @@ namespace DB3
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class DB3Entities1 : DbContext
+    public partial class DB3Entities2 : DbContext
     {
-        public DB3Entities1()
-            : base("name=DB3Entities1")
+        public DB3Entities2()
+            : base("name=DB3Entities2")
         {
         }
     
@@ -103,6 +103,19 @@ namespace DB3
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prDelStock", idParameter);
         }
     
+        public virtual ObjectResult<Nullable<int>> prgetmedicine_nametype(string param1, string param2)
+        {
+            var param1Parameter = param1 != null ?
+                new ObjectParameter("param1", param1) :
+                new ObjectParameter("param1", typeof(string));
+    
+            var param2Parameter = param2 != null ?
+                new ObjectParameter("param2", param2) :
+                new ObjectParameter("param2", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("prgetmedicine_nametype", param1Parameter, param2Parameter);
+        }
+    
         public virtual ObjectResult<prMedicine_Result> prMedicine(Nullable<int> id)
         {
             var idParameter = id.HasValue ?
@@ -127,9 +140,13 @@ namespace DB3
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prSalaries_Result>("prSalaries");
         }
     
-        public virtual ObjectResult<prSells_Result> prSells()
+        public virtual ObjectResult<prSells_Result> prSells(Nullable<System.DateTime> date)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prSells_Result>("prSells");
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("date", date) :
+                new ObjectParameter("date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prSells_Result>("prSells", dateParameter);
         }
     
         public virtual ObjectResult<prStaff_Result> prStaff()
@@ -254,27 +271,17 @@ namespace DB3
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
     
-        public virtual ObjectResult<Nullable<int>> prgetmedicine_nametype(string param1, string param2)
+        public virtual int prAddStock(Nullable<int> quantity, Nullable<int> med_id)
         {
-            var param1Parameter = param1 != null ?
-                new ObjectParameter("param1", param1) :
-                new ObjectParameter("param1", typeof(string));
+            var quantityParameter = quantity.HasValue ?
+                new ObjectParameter("quantity", quantity) :
+                new ObjectParameter("quantity", typeof(int));
     
-            var param2Parameter = param2 != null ?
-                new ObjectParameter("param2", param2) :
-                new ObjectParameter("param2", typeof(string));
+            var med_idParameter = med_id.HasValue ?
+                new ObjectParameter("med_id", med_id) :
+                new ObjectParameter("med_id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("prgetmedicine_nametype", param1Parameter, param2Parameter);
-        }
-    
-        public virtual ObjectResult<Company> companiesList()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Company>("companiesList");
-        }
-    
-        public virtual ObjectResult<Company> companiesList(MergeOption mergeOption)
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Company>("companiesList", mergeOption);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prAddStock", quantityParameter, med_idParameter);
         }
     }
 }

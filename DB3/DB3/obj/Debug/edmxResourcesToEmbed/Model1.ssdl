@@ -73,9 +73,7 @@
     <Property Name="Sell_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Date" Type="date" />
     <Property Name="Quantity" Type="int" />
-    <Property Name="Price" Type="int" />
     <Property Name="Total" Type="int" />
-    <Property Name="Medicine_id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Staff">
     <Key>
@@ -169,18 +167,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Sales_Medicine">
-    <End Role="Medicine" Type="Self.Medicine" Multiplicity="1" />
-    <End Role="Sells" Type="Self.Sells" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Medicine">
-        <PropertyRef Name="Medicine_id" />
-      </Principal>
-      <Dependent Role="Sells">
-        <PropertyRef Name="Medicine_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Stock_Medicine">
     <End Role="Medicine" Type="Self.Medicine" Multiplicity="0..1" />
     <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
@@ -194,6 +180,10 @@
     </ReferentialConstraint>
   </Association>
   <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="prAddStock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="quantity" Type="int" Mode="In" />
+    <Parameter Name="med_id" Type="int" Mode="In" />
+  </Function>
   <Function Name="prBills" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="prCompanies" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="prCompaniesName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -213,13 +203,19 @@
   <Function Name="prDelStock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
   </Function>
+  <Function Name="prgetmedicine_nametype" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="param1" Type="nvarchar" Mode="In" />
+    <Parameter Name="param2" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="prMedicine" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
   </Function>
   <Function Name="prMedicines" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="prOrders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="prSalaries" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="prSells" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="prSells" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="date" Type="date" Mode="In" />
+  </Function>
   <Function Name="prStaff" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="prStock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="prStock_with_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -285,10 +281,6 @@
     <AssociationSet Name="FK_Salary_Staff" Association="Self.FK_Salary_Staff">
       <End Role="Staff" EntitySet="Staff" />
       <End Role="Salary" EntitySet="Salary" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Sales_Medicine" Association="Self.FK_Sales_Medicine">
-      <End Role="Medicine" EntitySet="Medicine" />
-      <End Role="Sells" EntitySet="Sells" />
     </AssociationSet>
     <AssociationSet Name="FK_Stock_Medicine" Association="Self.FK_Stock_Medicine">
       <End Role="Medicine" EntitySet="Medicine" />

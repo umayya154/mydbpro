@@ -16,8 +16,6 @@ namespace DB3
         public int Sell_Id { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
         public Nullable<int> Quantity { get; set; }
-        public Nullable<int> Price { get; set; }
         public Nullable<int> Total { get; set; }
-        public int Medicine_id { get; set; }
     }
 }

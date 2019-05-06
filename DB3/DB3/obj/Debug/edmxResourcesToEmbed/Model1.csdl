@@ -49,7 +49,6 @@
     <Property Name="Weight" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <NavigationProperty Name="Company" Relationship="Self.FK_Medicine_Company" FromRole="Medicine" ToRole="Company" />
     <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Medicine" FromRole="Medicine" ToRole="Orders" />
-    <NavigationProperty Name="Sells" Relationship="Self.FK_Sales_Medicine" FromRole="Medicine" ToRole="Sells" />
     <NavigationProperty Name="Stocks" Relationship="Self.FK_Stock_Medicine" FromRole="Medicine" ToRole="Stock" />
   </EntityType>
   <EntityType Name="Order">
@@ -84,10 +83,7 @@
     <Property Name="Sell_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Date" Type="DateTime" Precision="0" />
     <Property Name="Quantity" Type="Int32" />
-    <Property Name="Price" Type="Int32" />
     <Property Name="Total" Type="Int32" />
-    <Property Name="Medicine_id" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Medicine" Relationship="Self.FK_Sales_Medicine" FromRole="Sells" ToRole="Medicine" />
   </EntityType>
   <EntityType Name="Staff">
     <Key>
@@ -171,18 +167,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Sales_Medicine">
-    <End Role="Medicine" Type="Self.Medicine" Multiplicity="1" />
-    <End Role="Sells" Type="Self.Sell" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Medicine">
-        <PropertyRef Name="Medicine_id" />
-      </Principal>
-      <Dependent Role="Sells">
-        <PropertyRef Name="Medicine_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Stock_Medicine">
     <End Role="Medicine" Type="Self.Medicine" Multiplicity="0..1" />
     <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
@@ -207,7 +191,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="DB3Entities1" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="DB3Entities2" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Bills" EntityType="Self.Bill" />
     <EntitySet Name="Companies" EntityType="Self.Company" />
     <EntitySet Name="Customers" EntityType="Self.Customer" />
@@ -233,10 +217,6 @@
     <AssociationSet Name="FK_Order_Medicine" Association="Self.FK_Order_Medicine">
       <End Role="Medicine" EntitySet="Medicines" />
       <End Role="Orders" EntitySet="Orders" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Sales_Medicine" Association="Self.FK_Sales_Medicine">
-      <End Role="Medicine" EntitySet="Medicines" />
-      <End Role="Sells" EntitySet="Sells" />
     </AssociationSet>
     <AssociationSet Name="FK_Stock_Medicine" Association="Self.FK_Stock_Medicine">
       <End Role="Medicine" EntitySet="Medicines" />
@@ -265,13 +245,19 @@
     <FunctionImport Name="prDelStock">
       <Parameter Name="id" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="prgetmedicine_nametype" ReturnType="Collection(Int32)">
+      <Parameter Name="param1" Mode="In" Type="String" />
+      <Parameter Name="param2" Mode="In" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="prMedicine" ReturnType="Collection(DB3Model.prMedicine_Result)">
       <Parameter Name="id" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="prMedicines" ReturnType="Collection(DB3Model.prMedicines_Result)" />
     <FunctionImport Name="prOrders" ReturnType="Collection(DB3Model.prOrders_Result)" />
     <FunctionImport Name="prSalaries" ReturnType="Collection(DB3Model.prSalaries_Result)" />
-    <FunctionImport Name="prSells" ReturnType="Collection(DB3Model.prSells_Result)" />
+    <FunctionImport Name="prSells" ReturnType="Collection(DB3Model.prSells_Result)">
+      <Parameter Name="date" Mode="In" Type="DateTime" />
+    </FunctionImport>
     <FunctionImport Name="prStaff" ReturnType="Collection(DB3Model.prStaff_Result)" />
     <FunctionImport Name="prStock" ReturnType="Collection(DB3Model.prStock_Result)" />
     <FunctionImport Name="prStock_with_id" ReturnType="Collection(DB3Model.prStock_with_id_Result)">
@@ -307,6 +293,10 @@
       <Parameter Name="new_diagramname" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="prAddStock">
+      <Parameter Name="quantity" Mode="In" Type="Int32" />
+      <Parameter Name="med_id" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="prBills_Result">
     <Property Type="Int32" Name="Bill_id" Nullable="false" />
@@ -377,9 +367,7 @@
     <Property Type="Int32" Name="Sell_Id" Nullable="false" />
     <Property Type="DateTime" Name="Date" Nullable="true" />
     <Property Type="Int32" Name="Quantity" Nullable="true" />
-    <Property Type="Int32" Name="Price" Nullable="true" />
     <Property Type="Int32" Name="Total" Nullable="true" />
-    <Property Type="Int32" Name="Medicine_id" Nullable="false" />
   </ComplexType>
   <ComplexType Name="prStaff_Result">
     <Property Type="Int32" Name="Staff_id" Nullable="false" />

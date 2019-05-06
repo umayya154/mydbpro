@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="DB3ModelStoreContainer" CdmEntityContainer="DB3Entities1">
+  <EntityContainerMapping StorageEntityContainer="DB3ModelStoreContainer" CdmEntityContainer="DB3Entities2">
     <EntitySetMapping Name="Bills">
       <EntityTypeMapping TypeName="DB3Model.Bill">
         <MappingFragment StoreEntitySet="Bill">
@@ -79,9 +79,7 @@
           <ScalarProperty Name="Sell_Id" ColumnName="Sell_Id" />
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Total" ColumnName="Total" />
-          <ScalarProperty Name="Medicine_id" ColumnName="Medicine_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -169,6 +167,7 @@
     <FunctionImportMapping FunctionImportName="prDelMedicine" FunctionName="DB3Model.Store.prDelMedicine" />
     <FunctionImportMapping FunctionImportName="prDelSell" FunctionName="DB3Model.Store.prDelSell" />
     <FunctionImportMapping FunctionImportName="prDelStock" FunctionName="DB3Model.Store.prDelStock" />
+    <FunctionImportMapping FunctionImportName="prgetmedicine_nametype" FunctionName="DB3Model.Store.prgetmedicine_nametype" />
     <FunctionImportMapping FunctionImportName="prMedicine" FunctionName="DB3Model.Store.prMedicine">
       <ResultMapping>
         <ComplexTypeMapping TypeName="DB3Model.prMedicine_Result">
@@ -228,9 +227,7 @@
           <ScalarProperty Name="Sell_Id" ColumnName="Sell_Id" />
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Total" ColumnName="Total" />
-          <ScalarProperty Name="Medicine_id" ColumnName="Medicine_id" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -291,5 +288,6 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="DB3Model.Store.sp_renamediagram" />
     <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="DB3Model.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="prAddStock" FunctionName="DB3Model.Store.prAddStock" />
   </EntityContainerMapping>
 </Mapping>
