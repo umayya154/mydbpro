@@ -92,7 +92,7 @@ namespace DB3.Controllers
             try
             {
                 // TODO: Add delete logic here
-                DB3Entities2 entity = new DB3Entities2();
+                DB3Entities3 entity = new DB3Entities3();
                 var s = entity.Sells.Where(x => x.Sell_Id == id).First();
                 entity.Sells.Remove(s);
                 entity.SaveChanges();

@@ -17,7 +17,7 @@ namespace DB3
         public string Name { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
-        public Nullable<int> status { get; set; }
+        public string status { get; set; }
         public string city { get; set; }
     }
 }

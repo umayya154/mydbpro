@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DB3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DB3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Bill">
           <Key>
             <PropertyRef Name="Bill_id" />
@@ -13,8 +13,8 @@
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="Price" Type="int" />
           <Property Name="Quantity" Type="int" />
-          <Property Name="CustomerID" Type="int" />
           <Property Name="OrderID" Type="int" />
+          <Property Name="CustomerID" Type="int" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
@@ -33,7 +33,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Address" Type="nvarchar(max)" />
           <Property Name="Phone" Type="nchar" MaxLength="20" />
-          <Property Name="status" Type="int" />
+          <Property Name="status" Type="nchar" MaxLength="20" />
           <Property Name="city" Type="nchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Medicine">
@@ -55,21 +55,10 @@
             <PropertyRef Name="order_id" />
           </Key>
           <Property Name="order_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="order_Medicine" Type="nvarchar" MaxLength="50" />
-          <Property Name="order_Quantity" Type="int" />
-          <Property Name="order_Price" Type="int" />
-          <Property Name="customer_id" Type="int" />
+          <Property Name="Medicine_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Price" Type="int" />
           <Property Name="medicine_id" Type="int" />
-        </EntityType>
-        <EntityType Name="Salary">
-          <Key>
-            <PropertyRef Name="Salary_ID" />
-          </Key>
-          <Property Name="Salary_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Amount" Type="int" />
-          <Property Name="Status" Type="int" />
-          <Property Name="Staff_Id" Type="int" />
-          <Property Name="Date" Type="date" />
         </EntityType>
         <EntityType Name="Sells">
           <Key>
@@ -93,6 +82,8 @@
           <Property Name="HireDate" Type="date" />
           <Property Name="City" Type="nvarchar" MaxLength="50" />
           <Property Name="DateOfBirth" Type="date" />
+          <Property Name="Status" Type="nchar" MaxLength="10" />
+          <Property Name="Salary" Type="int" />
         </EntityType>
         <EntityType Name="Stock">
           <Key>
@@ -112,6 +103,143 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB3.dbo.vbillsoflastyear' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vbillsoflastyear">
+          <Key>
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Customer Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB3.dbo.vbillsofthismonth' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vbillsofthismonth">
+          <Key>
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Customer Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB3.dbo.vbillsofthisyear' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vbillsofthisyear">
+          <Key>
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Customer Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB3.dbo.vmedstock' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vmedstock">
+          <Key>
+            <PropertyRef Name="Medicine Name" />
+            <PropertyRef Name="Company Name" />
+          </Key>
+          <Property Name="Medicine Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="nvarchar(max)" />
+          <Property Name="Weight" Type="nchar" MaxLength="10" />
+          <Property Name="Company Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Quantity" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB3.dbo.vpresentmed' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vpresentmed">
+          <Key>
+            <PropertyRef Name="Medicine_Name" />
+          </Key>
+          <Property Name="Medicine_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB3.dbo.vsellsofday' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vsellsofday">
+          <Key>
+            <PropertyRef Name="Sell_Id" />
+          </Key>
+          <Property Name="Sell_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Total" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB3.dbo.vsellsofthismonth' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vsellsofthismonth">
+          <Key>
+            <PropertyRef Name="Sell_Id" />
+          </Key>
+          <Property Name="Sell_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Total" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB3.dbo.vsellsofyear' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vsellsofyear">
+          <Key>
+            <PropertyRef Name="Sell_Id" />
+          </Key>
+          <Property Name="Sell_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Total" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB3.dbo.vstaffs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vstaffs">
+          <Key>
+            <PropertyRef Name="Staff Name" />
+            <PropertyRef Name="Address" />
+          </Key>
+          <Property Name="Staff Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Mobile_Number" Type="nchar" MaxLength="20" />
+          <Property Name="Hiring Date" Type="date" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateOfBirth" Type="date" />
+          <Property Name="Salary" Type="int" />
+          <Property Name="Status" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB3.dbo.vstaffstatus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vstaffstatus">
+          <Key>
+            <PropertyRef Name="Staff Name" />
+          </Key>
+          <Property Name="Staff Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="status" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK_Bill_Bill">
+          <End Role="Bill" Type="Self.Bill" Multiplicity="1" />
+          <End Role="Bill1" Type="Self.Bill" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Bill">
+              <PropertyRef Name="Bill_id" />
+            </Principal>
+            <Dependent Role="Bill1">
+              <PropertyRef Name="Bill_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bill_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="customer_id" />
+            </Principal>
+            <Dependent Role="Bill">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Bill_Order">
           <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
           <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
@@ -136,18 +264,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Order_Customer">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="customer_id" />
-            </Principal>
-            <Dependent Role="Orders">
-              <PropertyRef Name="customer_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Order_Medicine">
           <End Role="Medicine" Type="Self.Medicine" Multiplicity="0..1" />
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
@@ -157,18 +273,6 @@
             </Principal>
             <Dependent Role="Orders">
               <PropertyRef Name="medicine_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Salary_Staff">
-          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
-          <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Staff">
-              <PropertyRef Name="Staff_id" />
-            </Principal>
-            <Dependent Role="Salary">
-              <PropertyRef Name="Staff_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -262,11 +366,99 @@
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Medicine" EntityType="Self.Medicine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Salary" EntityType="Self.Salary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sells" EntityType="Self.Sells" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vbillsoflastyear" EntityType="Self.vbillsoflastyear" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vbillsoflastyear].[Date] AS [Date], 
+    [vbillsoflastyear].[Amount] AS [Amount], 
+    [vbillsoflastyear].[Quantity] AS [Quantity], 
+    [vbillsoflastyear].[Customer Name] AS [Customer Name]
+    FROM [dbo].[vbillsoflastyear] AS [vbillsoflastyear]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vbillsofthismonth" EntityType="Self.vbillsofthismonth" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vbillsofthismonth].[Date] AS [Date], 
+    [vbillsofthismonth].[Amount] AS [Amount], 
+    [vbillsofthismonth].[Quantity] AS [Quantity], 
+    [vbillsofthismonth].[Customer Name] AS [Customer Name]
+    FROM [dbo].[vbillsofthismonth] AS [vbillsofthismonth]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vbillsofthisyear" EntityType="Self.vbillsofthisyear" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vbillsofthisyear].[Date] AS [Date], 
+    [vbillsofthisyear].[Amount] AS [Amount], 
+    [vbillsofthisyear].[Quantity] AS [Quantity], 
+    [vbillsofthisyear].[Customer Name] AS [Customer Name]
+    FROM [dbo].[vbillsofthisyear] AS [vbillsofthisyear]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vmedstock" EntityType="Self.vmedstock" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vmedstock].[Medicine Name] AS [Medicine Name], 
+    [vmedstock].[Type] AS [Type], 
+    [vmedstock].[Weight] AS [Weight], 
+    [vmedstock].[Company Name] AS [Company Name], 
+    [vmedstock].[Quantity] AS [Quantity]
+    FROM [dbo].[vmedstock] AS [vmedstock]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vpresentmed" EntityType="Self.vpresentmed" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vpresentmed].[Medicine_Name] AS [Medicine_Name]
+    FROM [dbo].[vpresentmed] AS [vpresentmed]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vsellsofday" EntityType="Self.vsellsofday" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vsellsofday].[Sell_Id] AS [Sell_Id], 
+    [vsellsofday].[Date] AS [Date], 
+    [vsellsofday].[Quantity] AS [Quantity], 
+    [vsellsofday].[Total] AS [Total]
+    FROM [dbo].[vsellsofday] AS [vsellsofday]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vsellsofthismonth" EntityType="Self.vsellsofthismonth" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vsellsofthismonth].[Sell_Id] AS [Sell_Id], 
+    [vsellsofthismonth].[Date] AS [Date], 
+    [vsellsofthismonth].[Quantity] AS [Quantity], 
+    [vsellsofthismonth].[Total] AS [Total]
+    FROM [dbo].[vsellsofthismonth] AS [vsellsofthismonth]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vsellsofyear" EntityType="Self.vsellsofyear" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vsellsofyear].[Sell_Id] AS [Sell_Id], 
+    [vsellsofyear].[Date] AS [Date], 
+    [vsellsofyear].[Quantity] AS [Quantity], 
+    [vsellsofyear].[Total] AS [Total]
+    FROM [dbo].[vsellsofyear] AS [vsellsofyear]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vstaffs" EntityType="Self.vstaffs" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vstaffs].[Staff Name] AS [Staff Name], 
+    [vstaffs].[Email] AS [Email], 
+    [vstaffs].[Address] AS [Address], 
+    [vstaffs].[Mobile_Number] AS [Mobile_Number], 
+    [vstaffs].[Hiring Date] AS [Hiring Date], 
+    [vstaffs].[City] AS [City], 
+    [vstaffs].[DateOfBirth] AS [DateOfBirth], 
+    [vstaffs].[Salary] AS [Salary], 
+    [vstaffs].[Status] AS [Status]
+    FROM [dbo].[vstaffs] AS [vstaffs]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vstaffstatus" EntityType="Self.vstaffstatus" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vstaffstatus].[Staff Name] AS [Staff Name], 
+    [vstaffstatus].[status] AS [status]
+    FROM [dbo].[vstaffstatus] AS [vstaffstatus]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Bill_Bill" Association="Self.FK_Bill_Bill">
+            <End Role="Bill" EntitySet="Bill" />
+            <End Role="Bill1" EntitySet="Bill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bill_Customer" Association="Self.FK_Bill_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Bill" EntitySet="Bill" />
+          </AssociationSet>
           <AssociationSet Name="FK_Bill_Order" Association="Self.FK_Bill_Order">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="Bill" EntitySet="Bill" />
@@ -275,24 +467,17 @@
             <End Role="Company" EntitySet="Company" />
             <End Role="Medicine" EntitySet="Medicine" />
           </AssociationSet>
-          <AssociationSet Name="FK_Order_Customer" Association="Self.FK_Order_Customer">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="Orders" EntitySet="Orders" />
-          </AssociationSet>
           <AssociationSet Name="FK_Order_Medicine" Association="Self.FK_Order_Medicine">
             <End Role="Medicine" EntitySet="Medicine" />
             <End Role="Orders" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Salary_Staff" Association="Self.FK_Salary_Staff">
-            <End Role="Staff" EntitySet="Staff" />
-            <End Role="Salary" EntitySet="Salary" />
           </AssociationSet>
           <AssociationSet Name="FK_Stock_Medicine" Association="Self.FK_Stock_Medicine">
             <End Role="Medicine" EntitySet="Medicine" />
             <End Role="Stock" EntitySet="Stock" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DB3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -304,8 +489,11 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Price" Type="Int32" />
           <Property Name="Quantity" Type="Int32" />
-          <Property Name="CustomerID" Type="Int32" />
           <Property Name="OrderID" Type="Int32" />
+          <Property Name="CustomerID" Type="Int32" />
+          <NavigationProperty Name="Bill1" Relationship="Self.FK_Bill_Bill" FromRole="Bill" ToRole="Bill1" />
+          <NavigationProperty Name="Bill2" Relationship="Self.FK_Bill_Bill" FromRole="Bill1" ToRole="Bill" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Bill_Customer" FromRole="Bill" ToRole="Customer" />
           <NavigationProperty Name="Order" Relationship="Self.FK_Bill_Order" FromRole="Bill" ToRole="Orders" />
         </EntityType>
         <EntityType Name="Company">
@@ -326,9 +514,9 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Name="status" Type="Int32" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
           <Property Name="city" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Customer" FromRole="Customer" ToRole="Orders" />
+          <NavigationProperty Name="Bills" Relationship="Self.FK_Bill_Customer" FromRole="Customer" ToRole="Bill" />
         </EntityType>
         <EntityType Name="Medicine">
           <Key>
@@ -352,25 +540,12 @@
             <PropertyRef Name="order_id" />
           </Key>
           <Property Name="order_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="order_Medicine" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="order_Quantity" Type="Int32" />
-          <Property Name="order_Price" Type="Int32" />
-          <Property Name="customer_id" Type="Int32" />
+          <Property Name="Medicine_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Price" Type="Int32" />
           <Property Name="medicine_id" Type="Int32" />
           <NavigationProperty Name="Bills" Relationship="Self.FK_Bill_Order" FromRole="Orders" ToRole="Bill" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_Order_Customer" FromRole="Orders" ToRole="Customer" />
           <NavigationProperty Name="Medicine" Relationship="Self.FK_Order_Medicine" FromRole="Orders" ToRole="Medicine" />
-        </EntityType>
-        <EntityType Name="Salary">
-          <Key>
-            <PropertyRef Name="Salary_ID" />
-          </Key>
-          <Property Name="Salary_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Amount" Type="Int32" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="Staff_Id" Type="Int32" />
-          <Property Name="Date" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Staff" Relationship="Self.FK_Salary_Staff" FromRole="Salary" ToRole="Staff" />
         </EntityType>
         <EntityType Name="Sell">
           <Key>
@@ -394,7 +569,8 @@
           <Property Name="HireDate" Type="DateTime" Precision="0" />
           <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Salaries" Relationship="Self.FK_Salary_Staff" FromRole="Staff" ToRole="Salary" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Salary" Type="Int32" />
         </EntityType>
         <EntityType Name="Stock">
           <Key>
@@ -415,6 +591,123 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
+        <EntityType Name="vbillsoflastyear">
+          <Key>
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Customer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vbillsofthismonth">
+          <Key>
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Customer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vbillsofthisyear">
+          <Key>
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Customer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vmedstock">
+          <Key>
+            <PropertyRef Name="Medicine_Name" />
+            <PropertyRef Name="Company_Name" />
+          </Key>
+          <Property Name="Medicine_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Weight" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Company_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" />
+        </EntityType>
+        <EntityType Name="vpresentmed">
+          <Key>
+            <PropertyRef Name="Medicine_Name" />
+          </Key>
+          <Property Name="Medicine_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vsellsofday">
+          <Key>
+            <PropertyRef Name="Sell_Id" />
+          </Key>
+          <Property Name="Sell_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Total" Type="Int32" />
+        </EntityType>
+        <EntityType Name="vsellsofthismonth">
+          <Key>
+            <PropertyRef Name="Sell_Id" />
+          </Key>
+          <Property Name="Sell_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Total" Type="Int32" />
+        </EntityType>
+        <EntityType Name="vsellsofyear">
+          <Key>
+            <PropertyRef Name="Sell_Id" />
+          </Key>
+          <Property Name="Sell_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Total" Type="Int32" />
+        </EntityType>
+        <EntityType Name="vstaff">
+          <Key>
+            <PropertyRef Name="Staff_Name" />
+            <PropertyRef Name="Address" />
+          </Key>
+          <Property Name="Staff_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Mobile_Number" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Hiring_Date" Type="DateTime" Precision="0" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="Salary" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vstaffstatu">
+          <Key>
+            <PropertyRef Name="Staff_Name" />
+          </Key>
+          <Property Name="Staff_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Bill_Bill">
+          <End Role="Bill" Type="Self.Bill" Multiplicity="1" />
+          <End Role="Bill1" Type="Self.Bill" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Bill">
+              <PropertyRef Name="Bill_id" />
+            </Principal>
+            <Dependent Role="Bill1">
+              <PropertyRef Name="Bill_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bill_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="customer_id" />
+            </Principal>
+            <Dependent Role="Bill">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Bill_Order">
           <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
           <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
@@ -436,18 +729,6 @@
             </Principal>
             <Dependent Role="Medicine">
               <PropertyRef Name="CompanyID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Order_Customer">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="customer_id" />
-            </Principal>
-            <Dependent Role="Orders">
-              <PropertyRef Name="customer_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -475,29 +756,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Salary_Staff">
-          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
-          <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Staff">
-              <PropertyRef Name="Staff_id" />
-            </Principal>
-            <Dependent Role="Salary">
-              <PropertyRef Name="Staff_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="DB3Entities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DB3Entities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Bills" EntityType="Self.Bill" />
           <EntitySet Name="Companies" EntityType="Self.Company" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Medicines" EntityType="Self.Medicine" />
           <EntitySet Name="Orders" EntityType="Self.Order" />
-          <EntitySet Name="Salaries" EntityType="Self.Salary" />
           <EntitySet Name="Sells" EntityType="Self.Sell" />
           <EntitySet Name="Staffs" EntityType="Self.Staff" />
           <EntitySet Name="Stocks" EntityType="Self.Stock" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="vbillsoflastyears" EntityType="Self.vbillsoflastyear" />
+          <EntitySet Name="vbillsofthismonths" EntityType="Self.vbillsofthismonth" />
+          <EntitySet Name="vbillsofthisyears" EntityType="Self.vbillsofthisyear" />
+          <EntitySet Name="vmedstocks" EntityType="Self.vmedstock" />
+          <EntitySet Name="vpresentmeds" EntityType="Self.vpresentmed" />
+          <EntitySet Name="vsellsofdays" EntityType="Self.vsellsofday" />
+          <EntitySet Name="vsellsofthismonths" EntityType="Self.vsellsofthismonth" />
+          <EntitySet Name="vsellsofyears" EntityType="Self.vsellsofyear" />
+          <EntitySet Name="vstaffs" EntityType="Self.vstaff" />
+          <EntitySet Name="vstaffstatus" EntityType="Self.vstaffstatu" />
+          <AssociationSet Name="FK_Bill_Bill" Association="Self.FK_Bill_Bill">
+            <End Role="Bill" EntitySet="Bills" />
+            <End Role="Bill1" EntitySet="Bills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bill_Customer" Association="Self.FK_Bill_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Bill" EntitySet="Bills" />
+          </AssociationSet>
           <AssociationSet Name="FK_Bill_Order" Association="Self.FK_Bill_Order">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="Bill" EntitySet="Bills" />
@@ -505,10 +791,6 @@
           <AssociationSet Name="FK_Medicine_Company" Association="Self.FK_Medicine_Company">
             <End Role="Company" EntitySet="Companies" />
             <End Role="Medicine" EntitySet="Medicines" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_Customer" Association="Self.FK_Order_Customer">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_Medicine" Association="Self.FK_Order_Medicine">
             <End Role="Medicine" EntitySet="Medicines" />
@@ -518,46 +800,46 @@
             <End Role="Medicine" EntitySet="Medicines" />
             <End Role="Stock" EntitySet="Stocks" />
           </AssociationSet>
-          <AssociationSet Name="FK_Salary_Staff" Association="Self.FK_Salary_Staff">
-            <End Role="Staff" EntitySet="Staffs" />
-            <End Role="Salary" EntitySet="Salaries" />
-          </AssociationSet>
+          <FunctionImport Name="prAddStock">
+            <Parameter Name="quantity" Mode="In" Type="Int32" />
+            <Parameter Name="med_id" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="prBills" ReturnType="Collection(DB3Model.prBills_Result)" />
           <FunctionImport Name="prCompanies" ReturnType="Collection(DB3Model.prCompanies_Result)" />
           <FunctionImport Name="prCompaniesName" ReturnType="Collection(String)" />
           <FunctionImport Name="prCompany" ReturnType="Collection(DB3Model.prCompany_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="prCustomers" ReturnType="Collection(DB3Model.prCustomers_Result)" />
           <FunctionImport Name="prDelCompany">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="prDelMedicine">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="prDelSell">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="prDelStock">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="prgetmedicine_nametype" ReturnType="Collection(Int32)">
             <Parameter Name="param1" Mode="In" Type="String" />
             <Parameter Name="param2" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="prMedicine" ReturnType="Collection(DB3Model.prMedicine_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="prMedicines" ReturnType="Collection(DB3Model.prMedicines_Result)" />
           <FunctionImport Name="prOrders" ReturnType="Collection(DB3Model.prOrders_Result)" />
-          <FunctionImport Name="prSalaries" ReturnType="Collection(DB3Model.prSalaries_Result)" />
+          <FunctionImport Name="prSalaries" />
           <FunctionImport Name="prSells" ReturnType="Collection(DB3Model.prSells_Result)">
-          <Parameter Name="date" Mode="In" Type="DateTime" />
+            <Parameter Name="date" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="prStaff" ReturnType="Collection(DB3Model.prStaff_Result)" />
           <FunctionImport Name="prStock" ReturnType="Collection(DB3Model.prStock_Result)" />
           <FunctionImport Name="prStock_with_id" ReturnType="Collection(DB3Model.prStock_with_id_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -589,18 +871,14 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
-          <FunctionImport Name="prAddStock">
-            <Parameter Name="quantity" Mode="In" Type="Int32" />
-            <Parameter Name="med_id" Mode="In" Type="Int32" />
-          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="prBills_Result">
           <Property Type="Int32" Name="Bill_id" Nullable="false" />
           <Property Type="DateTime" Name="Date" Nullable="false" />
           <Property Type="Int32" Name="Price" Nullable="true" />
           <Property Type="Int32" Name="Quantity" Nullable="true" />
-          <Property Type="Int32" Name="CustomerID" Nullable="true" />
           <Property Type="Int32" Name="OrderID" Nullable="true" />
+          <Property Type="Int32" Name="CustomerID" Nullable="true" />
         </ComplexType>
         <ComplexType Name="prCompanies_Result">
           <Property Type="Int32" Name="Company_id" Nullable="false" />
@@ -619,7 +897,7 @@
           <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Address" Nullable="true" />
           <Property Type="String" Name="Phone" Nullable="true" MaxLength="20" />
-          <Property Type="Int32" Name="status" Nullable="true" />
+          <Property Type="String" Name="status" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="city" Nullable="true" MaxLength="20" />
         </ComplexType>
         <ComplexType Name="prMedicine_Result">
@@ -646,18 +924,10 @@
         </ComplexType>
         <ComplexType Name="prOrders_Result">
           <Property Type="Int32" Name="order_id" Nullable="false" />
-          <Property Type="String" Name="order_Medicine" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="order_Quantity" Nullable="true" />
-          <Property Type="Int32" Name="order_Price" Nullable="true" />
-          <Property Type="Int32" Name="customer_id" Nullable="true" />
+          <Property Type="String" Name="Medicine_Name" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="Int32" Name="Price" Nullable="true" />
           <Property Type="Int32" Name="medicine_id" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="prSalaries_Result">
-          <Property Type="Int32" Name="Salary_ID" Nullable="false" />
-          <Property Type="Int32" Name="Amount" Nullable="true" />
-          <Property Type="Int32" Name="Status" Nullable="true" />
-          <Property Type="Int32" Name="Staff_Id" Nullable="true" />
-          <Property Type="DateTime" Name="Date" Nullable="true" />
         </ComplexType>
         <ComplexType Name="prSells_Result">
           <Property Type="Int32" Name="Sell_Id" Nullable="false" />
@@ -675,6 +945,8 @@
           <Property Type="DateTime" Name="HireDate" Nullable="true" />
           <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="DateOfBirth" Nullable="true" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="Salary" Nullable="true" />
         </ComplexType>
         <ComplexType Name="prStock_Result">
           <Property Type="Int32" Name="Stock_Id" Nullable="false" />
@@ -702,7 +974,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DB3ModelStoreContainer" CdmEntityContainer="DB3Entities2">
+        <EntityContainerMapping StorageEntityContainer="DB3ModelStoreContainer" CdmEntityContainer="DB3Entities3">
           <EntitySetMapping Name="Bills">
             <EntityTypeMapping TypeName="DB3Model.Bill">
               <MappingFragment StoreEntitySet="Bill">
@@ -710,8 +982,8 @@
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -756,22 +1028,10 @@
             <EntityTypeMapping TypeName="DB3Model.Order">
               <MappingFragment StoreEntitySet="Orders">
                 <ScalarProperty Name="order_id" ColumnName="order_id" />
-                <ScalarProperty Name="order_Medicine" ColumnName="order_Medicine" />
-                <ScalarProperty Name="order_Quantity" ColumnName="order_Quantity" />
-                <ScalarProperty Name="order_Price" ColumnName="order_Price" />
-                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="Medicine_Name" ColumnName="Medicine_Name" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="medicine_id" ColumnName="medicine_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Salaries">
-            <EntityTypeMapping TypeName="DB3Model.Salary">
-              <MappingFragment StoreEntitySet="Salary">
-                <ScalarProperty Name="Salary_ID" ColumnName="Salary_ID" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Staff_Id" ColumnName="Staff_Id" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -797,6 +1057,8 @@
                 <ScalarProperty Name="HireDate" ColumnName="HireDate" />
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -820,6 +1082,108 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="vbillsoflastyears">
+            <EntityTypeMapping TypeName="DB3Model.vbillsoflastyear">
+              <MappingFragment StoreEntitySet="vbillsoflastyear">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Customer_Name" ColumnName="Customer Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vbillsofthismonths">
+            <EntityTypeMapping TypeName="DB3Model.vbillsofthismonth">
+              <MappingFragment StoreEntitySet="vbillsofthismonth">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Customer_Name" ColumnName="Customer Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vbillsofthisyears">
+            <EntityTypeMapping TypeName="DB3Model.vbillsofthisyear">
+              <MappingFragment StoreEntitySet="vbillsofthisyear">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Customer_Name" ColumnName="Customer Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vmedstocks">
+            <EntityTypeMapping TypeName="DB3Model.vmedstock">
+              <MappingFragment StoreEntitySet="vmedstock">
+                <ScalarProperty Name="Medicine_Name" ColumnName="Medicine Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Company_Name" ColumnName="Company Name" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vpresentmeds">
+            <EntityTypeMapping TypeName="DB3Model.vpresentmed">
+              <MappingFragment StoreEntitySet="vpresentmed">
+                <ScalarProperty Name="Medicine_Name" ColumnName="Medicine_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vsellsofdays">
+            <EntityTypeMapping TypeName="DB3Model.vsellsofday">
+              <MappingFragment StoreEntitySet="vsellsofday">
+                <ScalarProperty Name="Sell_Id" ColumnName="Sell_Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vsellsofthismonths">
+            <EntityTypeMapping TypeName="DB3Model.vsellsofthismonth">
+              <MappingFragment StoreEntitySet="vsellsofthismonth">
+                <ScalarProperty Name="Sell_Id" ColumnName="Sell_Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vsellsofyears">
+            <EntityTypeMapping TypeName="DB3Model.vsellsofyear">
+              <MappingFragment StoreEntitySet="vsellsofyear">
+                <ScalarProperty Name="Sell_Id" ColumnName="Sell_Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vstaffs">
+            <EntityTypeMapping TypeName="DB3Model.vstaff">
+              <MappingFragment StoreEntitySet="vstaffs">
+                <ScalarProperty Name="Staff_Name" ColumnName="Staff Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Mobile_Number" ColumnName="Mobile_Number" />
+                <ScalarProperty Name="Hiring_Date" ColumnName="Hiring Date" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vstaffstatus">
+            <EntityTypeMapping TypeName="DB3Model.vstaffstatu">
+              <MappingFragment StoreEntitySet="vstaffstatus">
+                <ScalarProperty Name="Staff_Name" ColumnName="Staff Name" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="prAddStock" FunctionName="DB3Model.Store.prAddStock" />
           <FunctionImportMapping FunctionImportName="prBills" FunctionName="DB3Model.Store.prBills">
             <ResultMapping>
               <ComplexTypeMapping TypeName="DB3Model.prBills_Result">
@@ -827,8 +1191,8 @@
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -904,25 +1268,14 @@
             <ResultMapping>
               <ComplexTypeMapping TypeName="DB3Model.prOrders_Result">
                 <ScalarProperty Name="order_id" ColumnName="order_id" />
-                <ScalarProperty Name="order_Medicine" ColumnName="order_Medicine" />
-                <ScalarProperty Name="order_Quantity" ColumnName="order_Quantity" />
-                <ScalarProperty Name="order_Price" ColumnName="order_Price" />
-                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="Medicine_Name" ColumnName="Medicine_Name" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="medicine_id" ColumnName="medicine_id" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="prSalaries" FunctionName="DB3Model.Store.prSalaries">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DB3Model.prSalaries_Result">
-                <ScalarProperty Name="Salary_ID" ColumnName="Salary_ID" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Staff_Id" ColumnName="Staff_Id" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="prSalaries" FunctionName="DB3Model.Store.prSalaries" />
           <FunctionImportMapping FunctionImportName="prSells" FunctionName="DB3Model.Store.prSells">
             <ResultMapping>
               <ComplexTypeMapping TypeName="DB3Model.prSells_Result">
@@ -945,6 +1298,8 @@
                 <ScalarProperty Name="HireDate" ColumnName="HireDate" />
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -990,7 +1345,6 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="DB3Model.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="DB3Model.Store.sp_upgraddiagrams" />
-          <FunctionImportMapping FunctionImportName="prAddStock" FunctionName="DB3Model.Store.prAddStock" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

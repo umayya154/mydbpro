@@ -39,7 +39,7 @@ namespace DB3.Models
 
         public int getquantity(int med_id)
         {
-            DB3Entities2 entity = new DB3Entities2();
+            DB3Entities3 entity = new DB3Entities3();
             List<Stock> l = entity.Stocks.ToList();
             foreach (Stock s in l)
             {
@@ -52,7 +52,7 @@ namespace DB3.Models
         }
         public void addquantity(int med_id, int q)// q is quantity
         {
-            DB3Entities2 entity = new DB3Entities2();
+            DB3Entities3 entity = new DB3Entities3();
             Stock s = new Stock();
             s.Quantity = q;
             s.Medicine_Id = med_id;
@@ -61,11 +61,57 @@ namespace DB3.Models
         }
         public void setquantity(int med_id, int q)
         {
-            DB3Entities2 entity = new DB3Entities2();
+            DB3Entities3 entity = new DB3Entities3();
             var s = entity.Stocks.Where(x => x.Medicine_Id == med_id).First();
             s.Quantity = q;
             entity.SaveChanges();
         }
-       
+        //public void editquantity(int )
+        public void medicineEdit(int id, MedicineModel obj)
+        {
+            DB3Entities3 entity = new DB3Entities3();
+            List<Medicine> ml = entity.Medicines.ToList();
+            MedicineModel mm = new MedicineModel();
+            foreach (Medicine medicine in ml)
+            {
+                if (medicine.Medicine_id == id)
+                {
+                    medicine.Medicine_Name = obj.name;
+                    medicine.Mfg_Date = obj.mfg_date;
+                    medicine.Exp_Date = obj.exp_date;
+                    medicine.Type = obj.type;
+                    medicine.Batch = obj.batch;
+                    medicine.Price = obj.price;
+                    CompanyModel c = new CompanyModel();
+                    medicine.CompanyID = c.getcompany_id(obj.company_Name);
+                    this.setquantity(id, obj.Quantity);
+                   
+                }
+            }
+            entity.SaveChanges();
+        }
+       public MedicineModel getmedicine(int id)
+        {
+            DB3Entities3 entity = new DB3Entities3();
+            List<Medicine> ml = entity.Medicines.ToList();
+            MedicineModel mm = new MedicineModel();
+            foreach (Medicine m in ml)
+            {
+                if (m.Medicine_id == id)
+                {
+                    mm.name = m.Medicine_Name;
+                    mm.mfg_date = m.Mfg_Date;
+                    mm.exp_date = Convert.ToDateTime(m.Exp_Date);
+                    mm.batch = m.Batch;
+                    mm.type = m.Type;
+                    mm.price = Convert.ToInt32(m.Price);
+                    CompanyModel c = new CompanyModel();
+                    mm.company_Name = c.getcompany_name(Convert.ToInt32(m.CompanyID));
+                    mm.Quantity = mm.getquantity(id);
+                    return mm;
+                }
+            }
+            return mm;
+        }
     }
 }

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.IO;
+
 
 namespace DB3.Controllers
 {
@@ -12,7 +14,7 @@ namespace DB3.Controllers
         // GET: Medicine
         public ActionResult MedicineList()
         {
-            DB3Entities2 entity = new DB3Entities2();
+            DB3Entities3 entity = new DB3Entities3();
             List<MedicineModel> mml = new List<MedicineModel>();
             List<Medicine> ml = entity.Medicines.ToList();
             foreach(Medicine m in ml)
@@ -32,12 +34,32 @@ namespace DB3.Controllers
             }
             return View(mml);
         }
+       /* public ActionResult ExamReport()
+        {/*
+            DB3Entities3 db = new DB3Entities3();
+            List<Medicine> exam = new List<Medicine>();
+            exam = db.Medicines.ToList();
 
+
+            //ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/Report"), "CrystalReportExam.rpt"));
+
+            rd.SetDataSource(exam);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+
+           // Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "ExamList.pdf");
+        }*/
         // GET: Medicine/Details/5
         public ActionResult MedicineDetails(int id)
         {
 
-            DB3Entities2 entity = new DB3Entities2();
+            DB3Entities3 entity = new DB3Entities3();
             Medicine m = entity.Medicines.Where(x => x.Medicine_id == id).First();
            // var m = entity.sp_docstatus(true).
             MedicineModel mm = new MedicineModel();
@@ -69,7 +91,7 @@ namespace DB3.Controllers
             try
             {
                 // TODO: Add insert logic here
-                DB3Entities2 entity = new DB3Entities2();
+                DB3Entities3 entity = new DB3Entities3();
                 var medicine = new Medicine();
                 medicine.Medicine_Name = obj.name;
                 medicine.Mfg_Date = obj.mfg_date;
@@ -96,46 +118,20 @@ namespace DB3.Controllers
         // GET: Medicine/Edit/5
         public ActionResult MedicineEdit(int id)
         {
-            DB3Entities2 entity = new DB3Entities2();
-            var m = entity.Medicines.Where(x => x.Medicine_id == id).First();
             MedicineModel mm = new MedicineModel();
-            mm.name = m.Medicine_Name;
-            mm.mfg_date = m.Mfg_Date;
-            mm.exp_date = Convert.ToDateTime(m.Exp_Date);
-            mm.batch = m.Batch;
-            mm.type = m.Type;
-            mm.price = Convert.ToInt32(m.Price);
-            var c = entity.Companies.Where(x => x.Company_id == m.CompanyID).First();
-            mm.company_Name = c.C_Name;
-            return View(mm);
+            return View(mm.getmedicine(id));
         }
 
         // POST: Medicine/Edit/5
         [HttpPost]
-        public ActionResult MedicineEdit(int id, MedicineModel obj)
+        public ActionResult MedicineEdit(int iD, MedicineModel obj)
         {
             try
             {
                 // TODO: Add update logic here
-                DB3Entities2 entity = new DB3Entities2();
-                var m = entity.Medicines.Where(x => x.Medicine_id == id).First();
-                
-                obj.name = m.Medicine_Name;
-                obj.mfg_date = m.Mfg_Date;
-                obj.exp_date = Convert.ToDateTime(m.Exp_Date);
-                obj.batch = m.Batch;
-                obj.type = m.Type;
-
-                obj.price = Convert.ToInt32(m.Price);
-                Stock s = new Stock();
-                s.Quantity = obj.Quantity;
-                s.Medicine_Id = id;
-                entity.Stocks.Add(s);
-                var c = entity.Companies.Where(x => x.Company_id == m.CompanyID).First();
-                obj.company_Name = c.C_Name;
-                obj.setquantity(m.Medicine_id, obj.Quantity);
-
-                return RedirectToAction("MedicineEdit", new { id = m.Medicine_id });
+                MedicineModel mm = new MedicineModel();
+                mm.medicineEdit(iD, obj);
+                return RedirectToAction("MedicineEdit", new { id = iD });
             }
             catch(Exception ex)
             {
@@ -146,7 +142,7 @@ namespace DB3.Controllers
         // GET: Medicine/Delete/5
         public ActionResult MedicineDelete(int id)
         {
-            DB3Entities2 entity = new DB3Entities2();
+            /*DB3Entities3 entity = new DB3Entities3();
             var m = entity.Medicines.Where(x => x.Medicine_id == id).First();
             MedicineModel mm = new MedicineModel();
             mm.name = m.Medicine_Name;
@@ -155,10 +151,12 @@ namespace DB3.Controllers
             mm.batch = m.Batch;
             mm.type = m.Type;
             mm.price = Convert.ToInt32(m.Price);
-            var c = entity.Companies.Where(x => x.Company_id == m.CompanyID).First();
-            mm.company_Name = c.C_Name;
-            mm.Quantity = mm.getquantity(id);
-            return View(mm);
+            CompanyModel c = new CompanyModel();
+            mm.company_Name = c.getcompany_name(Convert.ToInt32(m.CompanyID));
+            mm.Quantity = mm.getquantity(id);*/
+            MedicineModel mm = new MedicineModel();
+
+            return View(mm.getmedicine(id));
         }
 
         // POST: Medicine/Delete/5
@@ -168,7 +166,7 @@ namespace DB3.Controllers
             try
             {
                 // TODO: Add delete logic here
-                DB3Entities2 entity = new DB3Entities2();
+                DB3Entities3 entity = new DB3Entities3();
                // Medicine m = entity.Medicines.Where(x => x.Medicine_id == id).First();
                 entity.prDelMedicine(id);
                 entity.prDelStock(id);

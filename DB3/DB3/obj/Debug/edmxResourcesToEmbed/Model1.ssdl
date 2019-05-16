@@ -8,8 +8,8 @@
     <Property Name="Date" Type="date" Nullable="false" />
     <Property Name="Price" Type="int" />
     <Property Name="Quantity" Type="int" />
-    <Property Name="CustomerID" Type="int" />
     <Property Name="OrderID" Type="int" />
+    <Property Name="CustomerID" Type="int" />
   </EntityType>
   <EntityType Name="Company">
     <Key>
@@ -28,7 +28,7 @@
     <Property Name="Name" Type="nvarchar" MaxLength="50" />
     <Property Name="Address" Type="nvarchar(max)" />
     <Property Name="Phone" Type="nchar" MaxLength="20" />
-    <Property Name="status" Type="int" />
+    <Property Name="status" Type="nchar" MaxLength="20" />
     <Property Name="city" Type="nchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="Medicine">
@@ -50,21 +50,10 @@
       <PropertyRef Name="order_id" />
     </Key>
     <Property Name="order_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="order_Medicine" Type="nvarchar" MaxLength="50" />
-    <Property Name="order_Quantity" Type="int" />
-    <Property Name="order_Price" Type="int" />
-    <Property Name="customer_id" Type="int" />
+    <Property Name="Medicine_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Price" Type="int" />
     <Property Name="medicine_id" Type="int" />
-  </EntityType>
-  <EntityType Name="Salary">
-    <Key>
-      <PropertyRef Name="Salary_ID" />
-    </Key>
-    <Property Name="Salary_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Amount" Type="int" />
-    <Property Name="Status" Type="int" />
-    <Property Name="Staff_Id" Type="int" />
-    <Property Name="Date" Type="date" />
   </EntityType>
   <EntityType Name="Sells">
     <Key>
@@ -88,6 +77,8 @@
     <Property Name="HireDate" Type="date" />
     <Property Name="City" Type="nvarchar" MaxLength="50" />
     <Property Name="DateOfBirth" Type="date" />
+    <Property Name="Status" Type="nchar" MaxLength="10" />
+    <Property Name="Salary" Type="int" />
   </EntityType>
   <EntityType Name="Stock">
     <Key>
@@ -107,6 +98,143 @@
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB3.dbo.vbillsoflastyear' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vbillsoflastyear">
+    <Key>
+      <PropertyRef Name="Date" />
+    </Key>
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Amount" Type="int" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Customer Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB3.dbo.vbillsofthismonth' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vbillsofthismonth">
+    <Key>
+      <PropertyRef Name="Date" />
+    </Key>
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Amount" Type="int" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Customer Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB3.dbo.vbillsofthisyear' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vbillsofthisyear">
+    <Key>
+      <PropertyRef Name="Date" />
+    </Key>
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Amount" Type="int" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Customer Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB3.dbo.vmedstock' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vmedstock">
+    <Key>
+      <PropertyRef Name="Medicine Name" />
+      <PropertyRef Name="Company Name" />
+    </Key>
+    <Property Name="Medicine Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Type" Type="nvarchar(max)" />
+    <Property Name="Weight" Type="nchar" MaxLength="10" />
+    <Property Name="Company Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Quantity" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB3.dbo.vpresentmed' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vpresentmed">
+    <Key>
+      <PropertyRef Name="Medicine_Name" />
+    </Key>
+    <Property Name="Medicine_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB3.dbo.vsellsofday' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vsellsofday">
+    <Key>
+      <PropertyRef Name="Sell_Id" />
+    </Key>
+    <Property Name="Sell_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="date" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Total" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB3.dbo.vsellsofthismonth' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vsellsofthismonth">
+    <Key>
+      <PropertyRef Name="Sell_Id" />
+    </Key>
+    <Property Name="Sell_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="date" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Total" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB3.dbo.vsellsofyear' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vsellsofyear">
+    <Key>
+      <PropertyRef Name="Sell_Id" />
+    </Key>
+    <Property Name="Sell_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="date" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Total" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB3.dbo.vstaffs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vstaffs">
+    <Key>
+      <PropertyRef Name="Staff Name" />
+      <PropertyRef Name="Address" />
+    </Key>
+    <Property Name="Staff Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Mobile_Number" Type="nchar" MaxLength="20" />
+    <Property Name="Hiring Date" Type="date" />
+    <Property Name="City" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateOfBirth" Type="date" />
+    <Property Name="Salary" Type="int" />
+    <Property Name="Status" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB3.dbo.vstaffstatus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vstaffstatus">
+    <Key>
+      <PropertyRef Name="Staff Name" />
+    </Key>
+    <Property Name="Staff Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="status" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <Association Name="FK_Bill_Bill">
+    <End Role="Bill" Type="Self.Bill" Multiplicity="1" />
+    <End Role="Bill1" Type="Self.Bill" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Bill">
+        <PropertyRef Name="Bill_id" />
+      </Principal>
+      <Dependent Role="Bill1">
+        <PropertyRef Name="Bill_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bill_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="customer_id" />
+      </Principal>
+      <Dependent Role="Bill">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Bill_Order">
     <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
     <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
@@ -131,18 +259,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Order_Customer">
-    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="customer_id" />
-      </Principal>
-      <Dependent Role="Orders">
-        <PropertyRef Name="customer_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Order_Medicine">
     <End Role="Medicine" Type="Self.Medicine" Multiplicity="0..1" />
     <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
@@ -152,18 +268,6 @@
       </Principal>
       <Dependent Role="Orders">
         <PropertyRef Name="medicine_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Salary_Staff">
-    <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
-    <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Staff">
-        <PropertyRef Name="Staff_id" />
-      </Principal>
-      <Dependent Role="Salary">
-        <PropertyRef Name="Staff_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -257,11 +361,99 @@
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Medicine" EntityType="Self.Medicine" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Salary" EntityType="Self.Salary" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Sells" EntityType="Self.Sells" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="vbillsoflastyear" EntityType="Self.vbillsoflastyear" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vbillsoflastyear].[Date] AS [Date], 
+    [vbillsoflastyear].[Amount] AS [Amount], 
+    [vbillsoflastyear].[Quantity] AS [Quantity], 
+    [vbillsoflastyear].[Customer Name] AS [Customer Name]
+    FROM [dbo].[vbillsoflastyear] AS [vbillsoflastyear]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vbillsofthismonth" EntityType="Self.vbillsofthismonth" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vbillsofthismonth].[Date] AS [Date], 
+    [vbillsofthismonth].[Amount] AS [Amount], 
+    [vbillsofthismonth].[Quantity] AS [Quantity], 
+    [vbillsofthismonth].[Customer Name] AS [Customer Name]
+    FROM [dbo].[vbillsofthismonth] AS [vbillsofthismonth]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vbillsofthisyear" EntityType="Self.vbillsofthisyear" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vbillsofthisyear].[Date] AS [Date], 
+    [vbillsofthisyear].[Amount] AS [Amount], 
+    [vbillsofthisyear].[Quantity] AS [Quantity], 
+    [vbillsofthisyear].[Customer Name] AS [Customer Name]
+    FROM [dbo].[vbillsofthisyear] AS [vbillsofthisyear]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vmedstock" EntityType="Self.vmedstock" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vmedstock].[Medicine Name] AS [Medicine Name], 
+    [vmedstock].[Type] AS [Type], 
+    [vmedstock].[Weight] AS [Weight], 
+    [vmedstock].[Company Name] AS [Company Name], 
+    [vmedstock].[Quantity] AS [Quantity]
+    FROM [dbo].[vmedstock] AS [vmedstock]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vpresentmed" EntityType="Self.vpresentmed" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vpresentmed].[Medicine_Name] AS [Medicine_Name]
+    FROM [dbo].[vpresentmed] AS [vpresentmed]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vsellsofday" EntityType="Self.vsellsofday" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vsellsofday].[Sell_Id] AS [Sell_Id], 
+    [vsellsofday].[Date] AS [Date], 
+    [vsellsofday].[Quantity] AS [Quantity], 
+    [vsellsofday].[Total] AS [Total]
+    FROM [dbo].[vsellsofday] AS [vsellsofday]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vsellsofthismonth" EntityType="Self.vsellsofthismonth" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vsellsofthismonth].[Sell_Id] AS [Sell_Id], 
+    [vsellsofthismonth].[Date] AS [Date], 
+    [vsellsofthismonth].[Quantity] AS [Quantity], 
+    [vsellsofthismonth].[Total] AS [Total]
+    FROM [dbo].[vsellsofthismonth] AS [vsellsofthismonth]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vsellsofyear" EntityType="Self.vsellsofyear" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vsellsofyear].[Sell_Id] AS [Sell_Id], 
+    [vsellsofyear].[Date] AS [Date], 
+    [vsellsofyear].[Quantity] AS [Quantity], 
+    [vsellsofyear].[Total] AS [Total]
+    FROM [dbo].[vsellsofyear] AS [vsellsofyear]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vstaffs" EntityType="Self.vstaffs" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vstaffs].[Staff Name] AS [Staff Name], 
+    [vstaffs].[Email] AS [Email], 
+    [vstaffs].[Address] AS [Address], 
+    [vstaffs].[Mobile_Number] AS [Mobile_Number], 
+    [vstaffs].[Hiring Date] AS [Hiring Date], 
+    [vstaffs].[City] AS [City], 
+    [vstaffs].[DateOfBirth] AS [DateOfBirth], 
+    [vstaffs].[Salary] AS [Salary], 
+    [vstaffs].[Status] AS [Status]
+    FROM [dbo].[vstaffs] AS [vstaffs]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vstaffstatus" EntityType="Self.vstaffstatus" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vstaffstatus].[Staff Name] AS [Staff Name], 
+    [vstaffstatus].[status] AS [status]
+    FROM [dbo].[vstaffstatus] AS [vstaffstatus]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Bill_Bill" Association="Self.FK_Bill_Bill">
+      <End Role="Bill" EntitySet="Bill" />
+      <End Role="Bill1" EntitySet="Bill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bill_Customer" Association="Self.FK_Bill_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Bill" EntitySet="Bill" />
+    </AssociationSet>
     <AssociationSet Name="FK_Bill_Order" Association="Self.FK_Bill_Order">
       <End Role="Orders" EntitySet="Orders" />
       <End Role="Bill" EntitySet="Bill" />
@@ -270,17 +462,9 @@
       <End Role="Company" EntitySet="Company" />
       <End Role="Medicine" EntitySet="Medicine" />
     </AssociationSet>
-    <AssociationSet Name="FK_Order_Customer" Association="Self.FK_Order_Customer">
-      <End Role="Customer" EntitySet="Customer" />
-      <End Role="Orders" EntitySet="Orders" />
-    </AssociationSet>
     <AssociationSet Name="FK_Order_Medicine" Association="Self.FK_Order_Medicine">
       <End Role="Medicine" EntitySet="Medicine" />
       <End Role="Orders" EntitySet="Orders" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Salary_Staff" Association="Self.FK_Salary_Staff">
-      <End Role="Staff" EntitySet="Staff" />
-      <End Role="Salary" EntitySet="Salary" />
     </AssociationSet>
     <AssociationSet Name="FK_Stock_Medicine" Association="Self.FK_Stock_Medicine">
       <End Role="Medicine" EntitySet="Medicine" />

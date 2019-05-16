@@ -63,12 +63,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
                                 <nav>
                                     <ul class="nav navbar-nav">
-                                        <li class="active"><a href="~/Views/Home/Index.cshtml">Home</a></li>
-                                        <li><a href="#" class="scroll">Logout</a></li>
-                                        <!--><li><a href="#gallery" class="scroll">Gallery</a></li>
-                                        <li><a href="#team" class="scroll">Team</a></li>
-                                        <li><a href="#events" class="scroll">Events</a></li>
-                                        <li><a href="#mail" class="scroll">Mail Us</a></li>-->
+                                        <li class="active"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                                        <li><a href="@Url.Action("MedicineList", "Medicine")">Medicine Stock</a></li>
+                                        <li><a href="@Url.Action("SellList", "Sells")">Sell</a></li>
+                                        <li><a href="@Url.Action("CompanyList", "Company")">Companies</a></li>
+                                        <li><a href="@Url.Action("Index", "Order")">Order</a></li>
+                                        <li><a href="@Url.Action("StaffIndex", "Staff")">Staff</a></li>
+                                        <li><a href="@Url.Action("Index", "Home")">Logout</a></li>
+
                                     </ul>
                                 </nav>
                             </div>

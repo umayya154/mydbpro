@@ -12,7 +12,7 @@ namespace DB3.Controllers
         // GET: Company
         public ActionResult CompanyList()
         {
-            DB3Entities2 e = new DB3Entities2();
+            DB3Entities3 e = new DB3Entities3();
             List<CompanyModel> cml = new List<CompanyModel>();
             List<Company> cl = e.Companies.ToList();
             foreach(Company c in cl)
@@ -31,7 +31,7 @@ namespace DB3.Controllers
         // GET: Company/Details/5
         public ActionResult CompanyDetails(int id)
         {
-            DB3Entities2 e = new DB3Entities2();
+            DB3Entities3 e = new DB3Entities3();
             var company = e.Companies.Where(x => x.Company_id == id).First();
             CompanyModel cm = new CompanyModel();
             cm.Name = company.C_Name;
@@ -60,7 +60,7 @@ namespace DB3.Controllers
                 company.Address = obj.Address;
                 company.Mobile_Number = obj.Contact;
 
-                DB3Entities2 e = new DB3Entities2();
+                DB3Entities3 e = new DB3Entities3();
                 e.Companies.Add(company);
                 e.SaveChanges();
 
@@ -78,7 +78,7 @@ namespace DB3.Controllers
         // GET: Company/Edit/5
         public ActionResult CompanyEdit(int id)
         {
-            DB3Entities2 entity = new DB3Entities2();
+            DB3Entities3 entity = new DB3Entities3();
             var company = entity.Companies.Where(x => x.Company_id == id).First();
             CompanyModel cm = new CompanyModel();
             cm.Name = company.C_Name;
@@ -96,7 +96,7 @@ namespace DB3.Controllers
             try
             {
                 // TODO: Add update logic here
-                DB3Entities2 entity = new DB3Entities2();
+                DB3Entities3 entity = new DB3Entities3();
                 var company = entity.Companies.Where(x => x.Company_id == id).First();
                // Company c = new Company();
                 company.C_Name = obj.Name;
@@ -117,7 +117,7 @@ namespace DB3.Controllers
         // GET: Company/Delete/5
         public ActionResult CompanyDelete(int id)
         {
-            DB3Entities2 entity = new DB3Entities2();
+            DB3Entities3 entity = new DB3Entities3();
             var c = entity.Companies.Where(x => x.Company_id == id).First();
             CompanyModel cm = new CompanyModel();
             cm.Name = c.C_Name;
@@ -133,9 +133,10 @@ namespace DB3.Controllers
             try
             {
                 // TODO: Add delete logic here
-                DB3Entities2 entity = new DB3Entities2();
-                var c = entity.Companies.Where(x => x.Company_id == id).First();
-                entity.Companies.Remove(c);
+                DB3Entities3 entity = new DB3Entities3();
+                //var c = entity.Companies.Where(x => x.Company_id == id).First();
+                //c.Company_id = 0;
+                int r = entity.prDelCompany(id);
                 entity.SaveChanges();
                 return RedirectToAction("CompanyList");
             }

@@ -14,12 +14,6 @@ namespace DB3
     
     public partial class Staff
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Staff()
-        {
-            this.Salaries = new HashSet<Salary>();
-        }
-    
         public int Staff_id { get; set; }
         public string S_Name { get; set; }
         public string Email { get; set; }
@@ -29,8 +23,7 @@ namespace DB3
         public Nullable<System.DateTime> HireDate { get; set; }
         public string City { get; set; }
         public Nullable<System.DateTime> DateOfBirth { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Salary> Salaries { get; set; }
+        public string Status { get; set; }
+        public Nullable<int> Salary { get; set; }
     }
 }

@@ -14,10 +14,9 @@ namespace DB3
     public partial class prOrders_Result
     {
         public int order_id { get; set; }
-        public string order_Medicine { get; set; }
-        public Nullable<int> order_Quantity { get; set; }
-        public Nullable<int> order_Price { get; set; }
-        public Nullable<int> customer_id { get; set; }
+        public string Medicine_Name { get; set; }
+        public Nullable<int> Quantity { get; set; }
+        public Nullable<int> Price { get; set; }
         public Nullable<int> medicine_id { get; set; }
     }
 }

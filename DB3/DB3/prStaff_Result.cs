@@ -22,5 +22,7 @@ namespace DB3
         public Nullable<System.DateTime> HireDate { get; set; }
         public string City { get; set; }
         public Nullable<System.DateTime> DateOfBirth { get; set; }
+        public string Status { get; set; }
+        public Nullable<int> Salary { get; set; }
     }
 }

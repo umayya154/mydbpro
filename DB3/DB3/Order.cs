@@ -21,15 +21,13 @@ namespace DB3
         }
     
         public int order_id { get; set; }
-        public string order_Medicine { get; set; }
-        public Nullable<int> order_Quantity { get; set; }
-        public Nullable<int> order_Price { get; set; }
-        public Nullable<int> customer_id { get; set; }
-        public Nullable<int> medicine_id { get; set; }
+        public string Medicine_Name { get; set; }
+        public int Quantity { get; set; }
+        public int Price { get; set; }
+        public int medicine_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bill> Bills { get; set; }
-        public virtual Customer Customer { get; set; }
         public virtual Medicine Medicine { get; set; }
     }
 }

@@ -15,10 +15,10 @@ namespace DB3
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class DB3Entities2 : DbContext
+    public partial class DB3Entities3 : DbContext
     {
-        public DB3Entities2()
-            : base("name=DB3Entities2")
+        public DB3Entities3()
+            : base("name=DB3Entities3")
         {
         }
     
@@ -32,11 +32,33 @@ namespace DB3
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Medicine> Medicines { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<Salary> Salaries { get; set; }
         public virtual DbSet<Sell> Sells { get; set; }
         public virtual DbSet<Staff> Staffs { get; set; }
         public virtual DbSet<Stock> Stocks { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<vbillsoflastyear> vbillsoflastyears { get; set; }
+        public virtual DbSet<vbillsofthismonth> vbillsofthismonths { get; set; }
+        public virtual DbSet<vbillsofthisyear> vbillsofthisyears { get; set; }
+        public virtual DbSet<vmedstock> vmedstocks { get; set; }
+        public virtual DbSet<vpresentmed> vpresentmeds { get; set; }
+        public virtual DbSet<vsellsofday> vsellsofdays { get; set; }
+        public virtual DbSet<vsellsofthismonth> vsellsofthismonths { get; set; }
+        public virtual DbSet<vsellsofyear> vsellsofyears { get; set; }
+        public virtual DbSet<vstaff> vstaffs { get; set; }
+        public virtual DbSet<vstaffstatu> vstaffstatus { get; set; }
+    
+        public virtual int prAddStock(Nullable<int> quantity, Nullable<int> med_id)
+        {
+            var quantityParameter = quantity.HasValue ?
+                new ObjectParameter("quantity", quantity) :
+                new ObjectParameter("quantity", typeof(int));
+    
+            var med_idParameter = med_id.HasValue ?
+                new ObjectParameter("med_id", med_id) :
+                new ObjectParameter("med_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prAddStock", quantityParameter, med_idParameter);
+        }
     
         public virtual ObjectResult<prBills_Result> prBills()
         {
@@ -135,9 +157,9 @@ namespace DB3
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prOrders_Result>("prOrders");
         }
     
-        public virtual ObjectResult<prSalaries_Result> prSalaries()
+        public virtual int prSalaries()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prSalaries_Result>("prSalaries");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prSalaries");
         }
     
         public virtual ObjectResult<prSells_Result> prSells(Nullable<System.DateTime> date)
@@ -269,19 +291,6 @@ namespace DB3
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
-        }
-    
-        public virtual int prAddStock(Nullable<int> quantity, Nullable<int> med_id)
-        {
-            var quantityParameter = quantity.HasValue ?
-                new ObjectParameter("quantity", quantity) :
-                new ObjectParameter("quantity", typeof(int));
-    
-            var med_idParameter = med_id.HasValue ?
-                new ObjectParameter("med_id", med_id) :
-                new ObjectParameter("med_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prAddStock", quantityParameter, med_idParameter);
         }
     }
 }

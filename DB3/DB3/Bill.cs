@@ -18,9 +18,12 @@ namespace DB3
         public System.DateTime Date { get; set; }
         public Nullable<int> Price { get; set; }
         public Nullable<int> Quantity { get; set; }
-        public Nullable<int> CustomerID { get; set; }
         public Nullable<int> OrderID { get; set; }
+        public Nullable<int> CustomerID { get; set; }
     
+        public virtual Bill Bill1 { get; set; }
+        public virtual Bill Bill2 { get; set; }
+        public virtual Customer Customer { get; set; }
         public virtual Order Order { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace DB3.Models
 
         public int getMedicine(string name, string type, string weight)
         {
-            DB3Entities2 entity = new DB3Entities2();
+            DB3Entities3 entity = new DB3Entities3();
             List<Medicine> l = entity.Medicines.ToList();
             //List<Medicine> l = entity.Medicines.ToList();
             foreach(Medicine m in l)
@@ -37,7 +37,7 @@ namespace DB3.Models
         }
         public List<SellsModel> getlist()
         {
-            DB3Entities2 entity = new DB3Entities2();
+            DB3Entities3 entity = new DB3Entities3();
             List<Sell> l = entity.Sells.ToList();
             List<SellsModel> sl = new List<SellsModel>();
             foreach(Sell s in l)
@@ -53,7 +53,7 @@ namespace DB3.Models
         }
         public void addsell(SellsModel obj)
         {
-              DB3Entities2 entity = new DB3Entities2();
+              DB3Entities3 entity = new DB3Entities3();
               Sell s = new Sell();
               s.Quantity = obj.quantity;
               s.Total = obj.total;
@@ -63,7 +63,7 @@ namespace DB3.Models
         }
         public bool edited(int id , SellsModel sm)
         {
-            DB3Entities2 entity = new DB3Entities2();
+            DB3Entities3 entity = new DB3Entities3();
             List<Sell> l = entity.Sells.ToList();
             bool result = false;
             foreach (Sell s in l)
@@ -80,7 +80,7 @@ namespace DB3.Models
         }
         public SellsModel getdetail(int id)
         {
-            DB3Entities2 entity = new DB3Entities2();
+            DB3Entities3 entity = new DB3Entities3();
             List<Sell> l = entity.Sells.ToList();
             SellsModel sm = new SellsModel();
             foreach (Sell s in l)

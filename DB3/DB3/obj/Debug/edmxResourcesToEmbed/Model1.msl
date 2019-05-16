@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="DB3ModelStoreContainer" CdmEntityContainer="DB3Entities2">
+  <EntityContainerMapping StorageEntityContainer="DB3ModelStoreContainer" CdmEntityContainer="DB3Entities3">
     <EntitySetMapping Name="Bills">
       <EntityTypeMapping TypeName="DB3Model.Bill">
         <MappingFragment StoreEntitySet="Bill">
@@ -8,8 +8,8 @@
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
           <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -54,22 +54,10 @@
       <EntityTypeMapping TypeName="DB3Model.Order">
         <MappingFragment StoreEntitySet="Orders">
           <ScalarProperty Name="order_id" ColumnName="order_id" />
-          <ScalarProperty Name="order_Medicine" ColumnName="order_Medicine" />
-          <ScalarProperty Name="order_Quantity" ColumnName="order_Quantity" />
-          <ScalarProperty Name="order_Price" ColumnName="order_Price" />
-          <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+          <ScalarProperty Name="Medicine_Name" ColumnName="Medicine_Name" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="medicine_id" ColumnName="medicine_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Salaries">
-      <EntityTypeMapping TypeName="DB3Model.Salary">
-        <MappingFragment StoreEntitySet="Salary">
-          <ScalarProperty Name="Salary_ID" ColumnName="Salary_ID" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="Staff_Id" ColumnName="Staff_Id" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -95,6 +83,8 @@
           <ScalarProperty Name="HireDate" ColumnName="HireDate" />
           <ScalarProperty Name="City" ColumnName="City" />
           <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -118,6 +108,108 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="vbillsoflastyears">
+      <EntityTypeMapping TypeName="DB3Model.vbillsoflastyear">
+        <MappingFragment StoreEntitySet="vbillsoflastyear">
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Customer_Name" ColumnName="Customer Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vbillsofthismonths">
+      <EntityTypeMapping TypeName="DB3Model.vbillsofthismonth">
+        <MappingFragment StoreEntitySet="vbillsofthismonth">
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Customer_Name" ColumnName="Customer Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vbillsofthisyears">
+      <EntityTypeMapping TypeName="DB3Model.vbillsofthisyear">
+        <MappingFragment StoreEntitySet="vbillsofthisyear">
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Customer_Name" ColumnName="Customer Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vmedstocks">
+      <EntityTypeMapping TypeName="DB3Model.vmedstock">
+        <MappingFragment StoreEntitySet="vmedstock">
+          <ScalarProperty Name="Medicine_Name" ColumnName="Medicine Name" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Company_Name" ColumnName="Company Name" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vpresentmeds">
+      <EntityTypeMapping TypeName="DB3Model.vpresentmed">
+        <MappingFragment StoreEntitySet="vpresentmed">
+          <ScalarProperty Name="Medicine_Name" ColumnName="Medicine_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vsellsofdays">
+      <EntityTypeMapping TypeName="DB3Model.vsellsofday">
+        <MappingFragment StoreEntitySet="vsellsofday">
+          <ScalarProperty Name="Sell_Id" ColumnName="Sell_Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vsellsofthismonths">
+      <EntityTypeMapping TypeName="DB3Model.vsellsofthismonth">
+        <MappingFragment StoreEntitySet="vsellsofthismonth">
+          <ScalarProperty Name="Sell_Id" ColumnName="Sell_Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vsellsofyears">
+      <EntityTypeMapping TypeName="DB3Model.vsellsofyear">
+        <MappingFragment StoreEntitySet="vsellsofyear">
+          <ScalarProperty Name="Sell_Id" ColumnName="Sell_Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vstaffs">
+      <EntityTypeMapping TypeName="DB3Model.vstaff">
+        <MappingFragment StoreEntitySet="vstaffs">
+          <ScalarProperty Name="Staff_Name" ColumnName="Staff Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Mobile_Number" ColumnName="Mobile_Number" />
+          <ScalarProperty Name="Hiring_Date" ColumnName="Hiring Date" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vstaffstatus">
+      <EntityTypeMapping TypeName="DB3Model.vstaffstatu">
+        <MappingFragment StoreEntitySet="vstaffstatus">
+          <ScalarProperty Name="Staff_Name" ColumnName="Staff Name" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="prAddStock" FunctionName="DB3Model.Store.prAddStock" />
     <FunctionImportMapping FunctionImportName="prBills" FunctionName="DB3Model.Store.prBills">
       <ResultMapping>
         <ComplexTypeMapping TypeName="DB3Model.prBills_Result">
@@ -125,8 +217,8 @@
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
           <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -202,25 +294,14 @@
       <ResultMapping>
         <ComplexTypeMapping TypeName="DB3Model.prOrders_Result">
           <ScalarProperty Name="order_id" ColumnName="order_id" />
-          <ScalarProperty Name="order_Medicine" ColumnName="order_Medicine" />
-          <ScalarProperty Name="order_Quantity" ColumnName="order_Quantity" />
-          <ScalarProperty Name="order_Price" ColumnName="order_Price" />
-          <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+          <ScalarProperty Name="Medicine_Name" ColumnName="Medicine_Name" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="medicine_id" ColumnName="medicine_id" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="prSalaries" FunctionName="DB3Model.Store.prSalaries">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="DB3Model.prSalaries_Result">
-          <ScalarProperty Name="Salary_ID" ColumnName="Salary_ID" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="Staff_Id" ColumnName="Staff_Id" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prSalaries" FunctionName="DB3Model.Store.prSalaries" />
     <FunctionImportMapping FunctionImportName="prSells" FunctionName="DB3Model.Store.prSells">
       <ResultMapping>
         <ComplexTypeMapping TypeName="DB3Model.prSells_Result">
@@ -243,6 +324,8 @@
           <ScalarProperty Name="HireDate" ColumnName="HireDate" />
           <ScalarProperty Name="City" ColumnName="City" />
           <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -288,6 +371,5 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="DB3Model.Store.sp_renamediagram" />
     <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="DB3Model.Store.sp_upgraddiagrams" />
-    <FunctionImportMapping FunctionImportName="prAddStock" FunctionName="DB3Model.Store.prAddStock" />
   </EntityContainerMapping>
 </Mapping>

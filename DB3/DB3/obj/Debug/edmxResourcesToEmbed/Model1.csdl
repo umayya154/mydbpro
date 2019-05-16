@@ -8,8 +8,11 @@
     <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="Price" Type="Int32" />
     <Property Name="Quantity" Type="Int32" />
-    <Property Name="CustomerID" Type="Int32" />
     <Property Name="OrderID" Type="Int32" />
+    <Property Name="CustomerID" Type="Int32" />
+    <NavigationProperty Name="Bill1" Relationship="Self.FK_Bill_Bill" FromRole="Bill" ToRole="Bill1" />
+    <NavigationProperty Name="Bill2" Relationship="Self.FK_Bill_Bill" FromRole="Bill1" ToRole="Bill" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_Bill_Customer" FromRole="Bill" ToRole="Customer" />
     <NavigationProperty Name="Order" Relationship="Self.FK_Bill_Order" FromRole="Bill" ToRole="Orders" />
   </EntityType>
   <EntityType Name="Company">
@@ -30,9 +33,9 @@
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Phone" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-    <Property Name="status" Type="Int32" />
+    <Property Name="status" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
     <Property Name="city" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-    <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Customer" FromRole="Customer" ToRole="Orders" />
+    <NavigationProperty Name="Bills" Relationship="Self.FK_Bill_Customer" FromRole="Customer" ToRole="Bill" />
   </EntityType>
   <EntityType Name="Medicine">
     <Key>
@@ -56,25 +59,12 @@
       <PropertyRef Name="order_id" />
     </Key>
     <Property Name="order_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="order_Medicine" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="order_Quantity" Type="Int32" />
-    <Property Name="order_Price" Type="Int32" />
-    <Property Name="customer_id" Type="Int32" />
+    <Property Name="Medicine_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Price" Type="Int32" />
     <Property Name="medicine_id" Type="Int32" />
     <NavigationProperty Name="Bills" Relationship="Self.FK_Bill_Order" FromRole="Orders" ToRole="Bill" />
-    <NavigationProperty Name="Customer" Relationship="Self.FK_Order_Customer" FromRole="Orders" ToRole="Customer" />
     <NavigationProperty Name="Medicine" Relationship="Self.FK_Order_Medicine" FromRole="Orders" ToRole="Medicine" />
-  </EntityType>
-  <EntityType Name="Salary">
-    <Key>
-      <PropertyRef Name="Salary_ID" />
-    </Key>
-    <Property Name="Salary_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Amount" Type="Int32" />
-    <Property Name="Status" Type="Int32" />
-    <Property Name="Staff_Id" Type="Int32" />
-    <Property Name="Date" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="Staff" Relationship="Self.FK_Salary_Staff" FromRole="Salary" ToRole="Staff" />
   </EntityType>
   <EntityType Name="Sell">
     <Key>
@@ -98,7 +88,8 @@
     <Property Name="HireDate" Type="DateTime" Precision="0" />
     <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="Salaries" Relationship="Self.FK_Salary_Staff" FromRole="Staff" ToRole="Salary" />
+    <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Salary" Type="Int32" />
   </EntityType>
   <EntityType Name="Stock">
     <Key>
@@ -119,6 +110,123 @@
     <Property Name="version" Type="Int32" />
     <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
+  <EntityType Name="vbillsoflastyear">
+    <Key>
+      <PropertyRef Name="Date" />
+    </Key>
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Amount" Type="Int32" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Customer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="vbillsofthismonth">
+    <Key>
+      <PropertyRef Name="Date" />
+    </Key>
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Amount" Type="Int32" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Customer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="vbillsofthisyear">
+    <Key>
+      <PropertyRef Name="Date" />
+    </Key>
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Amount" Type="Int32" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Customer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="vmedstock">
+    <Key>
+      <PropertyRef Name="Medicine_Name" />
+      <PropertyRef Name="Company_Name" />
+    </Key>
+    <Property Name="Medicine_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Weight" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Company_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" />
+  </EntityType>
+  <EntityType Name="vpresentmed">
+    <Key>
+      <PropertyRef Name="Medicine_Name" />
+    </Key>
+    <Property Name="Medicine_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vsellsofday">
+    <Key>
+      <PropertyRef Name="Sell_Id" />
+    </Key>
+    <Property Name="Sell_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Total" Type="Int32" />
+  </EntityType>
+  <EntityType Name="vsellsofthismonth">
+    <Key>
+      <PropertyRef Name="Sell_Id" />
+    </Key>
+    <Property Name="Sell_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Total" Type="Int32" />
+  </EntityType>
+  <EntityType Name="vsellsofyear">
+    <Key>
+      <PropertyRef Name="Sell_Id" />
+    </Key>
+    <Property Name="Sell_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Total" Type="Int32" />
+  </EntityType>
+  <EntityType Name="vstaff">
+    <Key>
+      <PropertyRef Name="Staff_Name" />
+      <PropertyRef Name="Address" />
+    </Key>
+    <Property Name="Staff_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Mobile_Number" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Hiring_Date" Type="DateTime" Precision="0" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+    <Property Name="Salary" Type="Int32" />
+    <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="vstaffstatu">
+    <Key>
+      <PropertyRef Name="Staff_Name" />
+    </Key>
+    <Property Name="Staff_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Bill_Bill">
+    <End Role="Bill" Type="Self.Bill" Multiplicity="1" />
+    <End Role="Bill1" Type="Self.Bill" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Bill">
+        <PropertyRef Name="Bill_id" />
+      </Principal>
+      <Dependent Role="Bill1">
+        <PropertyRef Name="Bill_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bill_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="customer_id" />
+      </Principal>
+      <Dependent Role="Bill">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Bill_Order">
     <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
     <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
@@ -140,18 +248,6 @@
       </Principal>
       <Dependent Role="Medicine">
         <PropertyRef Name="CompanyID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Order_Customer">
-    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="customer_id" />
-      </Principal>
-      <Dependent Role="Orders">
-        <PropertyRef Name="customer_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -179,29 +275,34 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Salary_Staff">
-    <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
-    <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Staff">
-        <PropertyRef Name="Staff_id" />
-      </Principal>
-      <Dependent Role="Salary">
-        <PropertyRef Name="Staff_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityContainer Name="DB3Entities2" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="DB3Entities3" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Bills" EntityType="Self.Bill" />
     <EntitySet Name="Companies" EntityType="Self.Company" />
     <EntitySet Name="Customers" EntityType="Self.Customer" />
     <EntitySet Name="Medicines" EntityType="Self.Medicine" />
     <EntitySet Name="Orders" EntityType="Self.Order" />
-    <EntitySet Name="Salaries" EntityType="Self.Salary" />
     <EntitySet Name="Sells" EntityType="Self.Sell" />
     <EntitySet Name="Staffs" EntityType="Self.Staff" />
     <EntitySet Name="Stocks" EntityType="Self.Stock" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="vbillsoflastyears" EntityType="Self.vbillsoflastyear" />
+    <EntitySet Name="vbillsofthismonths" EntityType="Self.vbillsofthismonth" />
+    <EntitySet Name="vbillsofthisyears" EntityType="Self.vbillsofthisyear" />
+    <EntitySet Name="vmedstocks" EntityType="Self.vmedstock" />
+    <EntitySet Name="vpresentmeds" EntityType="Self.vpresentmed" />
+    <EntitySet Name="vsellsofdays" EntityType="Self.vsellsofday" />
+    <EntitySet Name="vsellsofthismonths" EntityType="Self.vsellsofthismonth" />
+    <EntitySet Name="vsellsofyears" EntityType="Self.vsellsofyear" />
+    <EntitySet Name="vstaffs" EntityType="Self.vstaff" />
+    <EntitySet Name="vstaffstatus" EntityType="Self.vstaffstatu" />
+    <AssociationSet Name="FK_Bill_Bill" Association="Self.FK_Bill_Bill">
+      <End Role="Bill" EntitySet="Bills" />
+      <End Role="Bill1" EntitySet="Bills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bill_Customer" Association="Self.FK_Bill_Customer">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Bill" EntitySet="Bills" />
+    </AssociationSet>
     <AssociationSet Name="FK_Bill_Order" Association="Self.FK_Bill_Order">
       <End Role="Orders" EntitySet="Orders" />
       <End Role="Bill" EntitySet="Bills" />
@@ -209,10 +310,6 @@
     <AssociationSet Name="FK_Medicine_Company" Association="Self.FK_Medicine_Company">
       <End Role="Company" EntitySet="Companies" />
       <End Role="Medicine" EntitySet="Medicines" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Order_Customer" Association="Self.FK_Order_Customer">
-      <End Role="Customer" EntitySet="Customers" />
-      <End Role="Orders" EntitySet="Orders" />
     </AssociationSet>
     <AssociationSet Name="FK_Order_Medicine" Association="Self.FK_Order_Medicine">
       <End Role="Medicine" EntitySet="Medicines" />
@@ -222,10 +319,10 @@
       <End Role="Medicine" EntitySet="Medicines" />
       <End Role="Stock" EntitySet="Stocks" />
     </AssociationSet>
-    <AssociationSet Name="FK_Salary_Staff" Association="Self.FK_Salary_Staff">
-      <End Role="Staff" EntitySet="Staffs" />
-      <End Role="Salary" EntitySet="Salaries" />
-    </AssociationSet>
+    <FunctionImport Name="prAddStock">
+      <Parameter Name="quantity" Mode="In" Type="Int32" />
+      <Parameter Name="med_id" Mode="In" Type="Int32" />
+    </FunctionImport>
     <FunctionImport Name="prBills" ReturnType="Collection(DB3Model.prBills_Result)" />
     <FunctionImport Name="prCompanies" ReturnType="Collection(DB3Model.prCompanies_Result)" />
     <FunctionImport Name="prCompaniesName" ReturnType="Collection(String)" />
@@ -254,7 +351,7 @@
     </FunctionImport>
     <FunctionImport Name="prMedicines" ReturnType="Collection(DB3Model.prMedicines_Result)" />
     <FunctionImport Name="prOrders" ReturnType="Collection(DB3Model.prOrders_Result)" />
-    <FunctionImport Name="prSalaries" ReturnType="Collection(DB3Model.prSalaries_Result)" />
+    <FunctionImport Name="prSalaries" />
     <FunctionImport Name="prSells" ReturnType="Collection(DB3Model.prSells_Result)">
       <Parameter Name="date" Mode="In" Type="DateTime" />
     </FunctionImport>
@@ -293,18 +390,14 @@
       <Parameter Name="new_diagramname" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
-    <FunctionImport Name="prAddStock">
-      <Parameter Name="quantity" Mode="In" Type="Int32" />
-      <Parameter Name="med_id" Mode="In" Type="Int32" />
-    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="prBills_Result">
     <Property Type="Int32" Name="Bill_id" Nullable="false" />
     <Property Type="DateTime" Name="Date" Nullable="false" />
     <Property Type="Int32" Name="Price" Nullable="true" />
     <Property Type="Int32" Name="Quantity" Nullable="true" />
-    <Property Type="Int32" Name="CustomerID" Nullable="true" />
     <Property Type="Int32" Name="OrderID" Nullable="true" />
+    <Property Type="Int32" Name="CustomerID" Nullable="true" />
   </ComplexType>
   <ComplexType Name="prCompanies_Result">
     <Property Type="Int32" Name="Company_id" Nullable="false" />
@@ -323,7 +416,7 @@
     <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="Address" Nullable="true" />
     <Property Type="String" Name="Phone" Nullable="true" MaxLength="20" />
-    <Property Type="Int32" Name="status" Nullable="true" />
+    <Property Type="String" Name="status" Nullable="true" MaxLength="20" />
     <Property Type="String" Name="city" Nullable="true" MaxLength="20" />
   </ComplexType>
   <ComplexType Name="prMedicine_Result">
@@ -350,18 +443,10 @@
   </ComplexType>
   <ComplexType Name="prOrders_Result">
     <Property Type="Int32" Name="order_id" Nullable="false" />
-    <Property Type="String" Name="order_Medicine" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="order_Quantity" Nullable="true" />
-    <Property Type="Int32" Name="order_Price" Nullable="true" />
-    <Property Type="Int32" Name="customer_id" Nullable="true" />
+    <Property Type="String" Name="Medicine_Name" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Quantity" Nullable="true" />
+    <Property Type="Int32" Name="Price" Nullable="true" />
     <Property Type="Int32" Name="medicine_id" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="prSalaries_Result">
-    <Property Type="Int32" Name="Salary_ID" Nullable="false" />
-    <Property Type="Int32" Name="Amount" Nullable="true" />
-    <Property Type="Int32" Name="Status" Nullable="true" />
-    <Property Type="Int32" Name="Staff_Id" Nullable="true" />
-    <Property Type="DateTime" Name="Date" Nullable="true" />
   </ComplexType>
   <ComplexType Name="prSells_Result">
     <Property Type="Int32" Name="Sell_Id" Nullable="false" />
@@ -379,6 +464,8 @@
     <Property Type="DateTime" Name="HireDate" Nullable="true" />
     <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
     <Property Type="DateTime" Name="DateOfBirth" Nullable="true" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="10" />
+    <Property Type="Int32" Name="Salary" Nullable="true" />
   </ComplexType>
   <ComplexType Name="prStock_Result">
     <Property Type="Int32" Name="Stock_Id" Nullable="false" />

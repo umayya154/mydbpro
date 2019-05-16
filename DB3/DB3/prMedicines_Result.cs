@@ -15,12 +15,12 @@ namespace DB3
     {
         public int Medicine_id { get; set; }
         public string Medicine_Name { get; set; }
-        public Nullable<int> Price { get; set; }
+        public int Price { get; set; }
         public System.DateTime Mfg_Date { get; set; }
         public Nullable<System.DateTime> Exp_Date { get; set; }
         public string Batch { get; set; }
         public string Type { get; set; }
-        public Nullable<int> CompanyID { get; set; }
+        public int CompanyID { get; set; }
         public string Weight { get; set; }
     }
 }
